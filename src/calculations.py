@@ -7,6 +7,29 @@ class Character(StrEnum):
     Fox = "Fox"
     Falco = "Falco"
     Marth = "Marth"
+    Bowser = "Bowser"
+    DonkeyKong = "Donkey Kong"
+    Samus = "Samus"
+    Ganondorf = "Ganondorf"
+    Yoshi = "Yoshi"
+    CaptainFalcon = "Captain Falcon"
+    Link = "Link"
+    DrMario = "Dr. Mario"
+    Luigi = "Luigi"
+    Mario = "Mario"
+    Ness = "Ness"
+    Peach = "Peach"
+    Sheik = "Sheik"
+    Zelda = "Zelda"
+    IceClimbers = "Ice Climbers"
+    Mewtwo = "Mewtwo"
+    Roy = "Roy"
+    YoungLink = "Young Link"
+    Pikachu = "Pikachu"
+    Kirby = "Kirby"
+    Jigglypuff = "Jigglypuff"
+    MrGameAndWatch = "Mr. Game & Watch"
+    Pichu = "Pichu"
 
 
 # at low-kb sakurai angle moves cannot be asdi-down'ed.
@@ -24,6 +47,8 @@ class Move:
     percent: int
     scaling: float
     base_knockback: float
+    sakurai: bool = False
+    downwards: bool = False
 
 
 def kb(
