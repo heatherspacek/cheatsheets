@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block title %}
+heather's batch uploader website :]
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <p>
+    <h3>what's this?</h3>
+    idk lol :D
+    </p>
+    <br>
+    {{ auth_status }} <a href="/auth/google">Click here to authenticate with Google...</a>
+    <br>
+    {{ render_form(form) }}
+    <p class="pt-5"><strong>{{ message }}</strong></p>
+
+</div>
+
+{% endblock %}
