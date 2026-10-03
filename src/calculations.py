@@ -69,3 +69,30 @@ def kb(
     r = 1 / 3 if crouch else 1.0
     inner = (p * d / 20) + (p / 10)
     return r * (b + (s * (18.0 + inner * 280 / (w + 100))))
+
+
+def knockdown_percent(
+    move: Move,
+    character: Character,
+):
+    """TODO: binary search instead of loop"""
+    from .data import weights
+
+    for pct in range(-10, 100, 1):
+        k = kb(
+            move.percent,
+            pct,
+            weights[character],
+            move.scaling,
+            move.base_knockback,
+            crouch=False,
+        )
+        if k >= 80.0:
+            return pct
+
+
+if __name__ == "__main__":
+    from .data import moves
+
+    m1 = moves[Character.Fox]["nair_early"][0]
+    breakpoint()

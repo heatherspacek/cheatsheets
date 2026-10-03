@@ -13,42 +13,37 @@ from flask import (
     request,
     session,
 )
-from flask_bootstrap import Bootstrap5
 
-from flask_wtf import FlaskForm, CSRFProtect
-from wtforms import MultipleFileField, SubmitField, StringField
+from wtforms import MultipleFileField, SubmitField, StringField, SelectField
 from wtforms.validators import DataRequired
 
 
 app = Flask(__name__)
 app.secret_key = secrets.token_urlsafe(16)
 
-bootstrap = Bootstrap5(app)
-csrf = CSRFProtect(app)  # cross-site scripting protection, somehow
+
+# class FrontForm(FlaskForm):
+#     uploader = MultipleFileField(
+#         "choose some replay files for processing.",
+#         validators=[DataRequired()],
+#     )
+#     tourney_slug_input = StringField(
+#         description="URL slug for the tournament, e.g. black-tie-9",
+#         validators=[DataRequired()],
+#     )
+#     submit = SubmitField("Submit")
 
 
-class FrontForm(FlaskForm):
-    uploader = MultipleFileField(
-        "choose some replay files for processing.",
-        validators=[DataRequired()],
-    )
-    tourney_slug_input = StringField(
-        description="URL slug for the tournament, e.g. black-tie-9",
-        validators=[DataRequired()],
-    )
-    submit = SubmitField("Submit")
-
-
-class SubmitForm(FlaskForm):
-    titlefield = StringField(
-        description="Title for the YouTube upload.",
-    )
-    submit = SubmitField("Submit")
+# class SubmitForm(FlaskForm):
+#     titlefield = StringField(
+#         description="Title for the YouTube upload.",
+#     )
+#     submit = SubmitField("Submit")
 
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    form = FrontForm()
+    # form = FrontForm()
     if "user_id" not in session:
         # just got here, generate a UID.
         session["user_id"] = str(uuid.uuid4())
@@ -95,7 +90,7 @@ def index():
 
     return render_template(
         "index.html",
-        form=form,
+        # form=form,
         message=message,
         auth_status=auth_status,
     )

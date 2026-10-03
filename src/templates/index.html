@@ -1,24 +1,81 @@
-{% extends 'base.html' %}
-{% from 'bootstrap5/form.html' import render_form %}
+<style>
+    .sidebar {
+        position: absolute;
+        display: block;
+        width: 15rem;
+        background-color: rgb(184, 182, 182);
+        height: 100%;
+    }
 
-{% block title %}
-heather's batch uploader website :]
-{% endblock %}
+    .content {
+        position: absolute;
+        left: 15rem;
+        y: 0;
+        width: auto;
+        height: 100%;
+        display: block;
+    }
+</style>
 
-{% block content %}
+<div class="sidebar">
+    <form action="/submit" method="POST">
+        <label for="attacker">Opponent character (attacker)</label>
+        <select name="attacker" onchange="this.form.submit()">
+            <option value="fox">Fox</option>
+        </select>
+        <label for="defender">Your character (defender)</label>
+        <select name="defender" onchange="this.form.submit()">
+            <option value="marth">Marth</option>
+            <option value="fox">Fox</option>
+            <option value="falco">Falco</option>
+        </select>
 
-<div class="container">
+    </form>
 
-    <p>
-    <h3>what's this?</h3>
-    idk lol :D
-    </p>
-    <br>
-    {{ auth_status }} <a href="/auth/google">Click here to authenticate with Google...</a>
-    <br>
-    {{ render_form(form) }}
-    <p class="pt-5"><strong>{{ message }}</strong></p>
+    <details name="expand">
+        <summary>Ground moves</summary>
+        <form>
+            <fieldset>
+                <legend>top of the thingy</legend>
+                <input type="checkbox" id="ch1">
+                <label for="ch1">check1</label>
+                <input type="checkbox" id="ch2">
+                <label for="ch2">check2</label>
+
+            </fieldset>
+        </form>
+    </details>
+    <details name="expand">
+        <summary>Aerials</summary>
+        <form>
+            <fieldset>
+                <legend>top of the thingy</legend>
+                <input type="checkbox" id="ch1">
+                <label for="ch1">check1</label>
+                <input type="checkbox" id="ch2">
+                <label for="ch2">check2</label>
+
+            </fieldset>
+        </form>
+    </details>
+    <details name="expand">
+        <summary>Specials</summary>
+        <form>
+            <fieldset>
+                <legend>top of the thingy</legend>
+                <input type="checkbox" id="ch1">
+                <label for="ch1">check1</label>
+                <input type="checkbox" id="ch2">
+                <label for="ch2">check2</label>
+
+            </fieldset>
+        </form>
+    </details>
+
+
 
 </div>
 
-{% endblock %}
+<div class="content">
+
+</div>
