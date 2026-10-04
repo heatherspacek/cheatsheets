@@ -7,13 +7,32 @@
         height: 100%;
     }
 
+    @media print {
+        .sidebar {
+            visibility: hidden;
+        }
+    }
+
     .content {
         position: absolute;
-        left: 15rem;
+        left: 18rem;
+        top: 5%;
         y: 0;
-        width: auto;
-        height: 100%;
-        display: block;
+        width: 60%;
+        height: 90%;
+        display: grid;
+        border: 3px double gray;
+        resize: both;
+        overflow: auto;
+    }
+
+    .rangebox {
+        background: linear-gradient(red, orange);
+    }
+
+    .gridline {
+        border-top: 2px solid gray;
+        grid-column: 1 / 5;
     }
 </style>
 
@@ -31,7 +50,7 @@
         </select>
     </form>
     <label for="max-percent">Max %:</label>
-    <input type="range" value="100" min="0" max="150" step="10" id="max-percent"
+    <input type="range" value="100" min="10" max="200" step="10" id="max-percent"
         oninput="maxPercentValue.innerText = this.value">
     <output id="maxPercentValue">100</output>
 
@@ -77,5 +96,18 @@
 <!-- /sidebar -->
 
 <div class="content">
+    <div class="gridline" style="grid-row: 1 / 11;">0%</div>
+    <div class="gridline" style="grid-row: 11 / 21;">10%</div>
+    <div class="gridline" style="grid-row: 21 / 31;">20%</div>
+    <div class="gridline" style="grid-row: 31 / 41;">30%</div>
+    <div class="gridline" style="grid-row: 41 / 51;">40%</div>
+    <div class="gridline" style="grid-row: 51 / 61;">50%</div>
+    <div class="gridline" style="grid-row: 61 / 71;">60%</div>
+    <div class="gridline" style="grid-row: 71 / 81;">70%</div>
+    <div class="gridline" style="grid-row: 81 / 91;">80%</div>
+    <div class="gridline" style="grid-row: 91 / 101;">90%</div>
 
+    <div class="rangebox" style="grid-row: 40 / 55; grid-column: 2;">
+        40-55
+    </div>
 </div>
