@@ -19,20 +19,23 @@
 
 <div class="sidebar">
     <form action="/submit" method="POST">
-        <label for="attacker">Opponent character (attacker)</label>
+        <label for="attacker">Opponent char (attacker)</label>
         <select name="attacker" onchange="this.form.submit()">
             <option value="fox">Fox</option>
         </select>
-        <label for="defender">Your character (defender)</label>
+        <label for="defender">Your char (defender)</label>
         <select name="defender" onchange="this.form.submit()">
             <option value="marth">Marth</option>
             <option value="fox">Fox</option>
             <option value="falco">Falco</option>
         </select>
-
     </form>
+    <label for="max-percent">Max %:</label>
+    <input type="range" value="100" min="0" max="150" step="10" id="max-percent"
+        oninput="maxPercentValue.innerText = this.value">
+    <output id="maxPercentValue">100</output>
 
-    <details name="expand">
+    <details name="expand1">
         <summary>Ground moves</summary>
         <form>
             <fieldset>
@@ -45,36 +48,33 @@
             </fieldset>
         </form>
     </details>
-    <details name="expand">
+    <details name="expand2">
         <summary>Aerials</summary>
         <form>
             <fieldset>
                 <legend>top of the thingy</legend>
-                <input type="checkbox" id="ch1">
-                <label for="ch1">check1</label>
-                <input type="checkbox" id="ch2">
-                <label for="ch2">check2</label>
+                <input type="checkbox" id="ch2.1">
+                <label for="ch2.1">check1</label>
+                <input type="checkbox" id="ch2.2">
+                <label for="ch2.2">check2</label>
 
             </fieldset>
         </form>
     </details>
-    <details name="expand">
+    <details name="expand3">
         <summary>Specials</summary>
         <form>
             <fieldset>
                 <legend>top of the thingy</legend>
-                <input type="checkbox" id="ch1">
-                <label for="ch1">check1</label>
-                <input type="checkbox" id="ch2">
-                <label for="ch2">check2</label>
-
+                <input type="checkbox" id="ch3.1">
+                <label for="ch3.1">check1</label>
+                <input type="checkbox" id="ch3.2">
+                <label for="ch3.2">check2</label>
             </fieldset>
         </form>
     </details>
-
-
-
 </div>
+<!-- /sidebar -->
 
 <div class="content">
 
