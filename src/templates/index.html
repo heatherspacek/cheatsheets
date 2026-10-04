@@ -1,4 +1,10 @@
 <style>
+    :root {
+        --blue: linear-gradient(rgb(169, 189, 233), rgb(137, 137, 225));
+        --cyan: linear-gradient(rgb(169, 219, 233), rgb(137, 215, 225));
+        --green: linear-gradient(rgb(172, 233, 169), rgb(163, 225, 137));
+    }
+
     .sidebar {
         position: absolute;
         display: block;
@@ -13,13 +19,19 @@
         }
     }
 
+    .contenthead {
+        position: absolute;
+        left: 18rem;
+        top: 0;
+    }
+
     .content {
         position: absolute;
         left: 18rem;
-        top: 5%;
+        top: 10%;
         y: 0;
         width: 60%;
-        height: 90%;
+        height: 85%;
         display: grid;
         border: 3px double gray;
         resize: both;
@@ -27,12 +39,35 @@
     }
 
     .rangebox {
-        background: linear-gradient(red, orange);
+        background: linear-gradient(rgb(239, 119, 119), rgb(209, 178, 122));
+        grid-column: 2 / span 3;
+        border: 1px solid black;
+        display: grid;
+        grid-template-rows: subgrid;
+        min-height: 0;
+
+        &>p {
+            position: absolute;
+            /* writing-mode: vertical-rl;
+            text-orientation: sideways; */
+            text-wrap: 1;
+        }
+
+        &>.sidetext {
+            position: absolute;
+            font-size: larger;
+            font-style: italic;
+            writing-mode: vertical-rl;
+            text-orientation: sideways;
+            grid-column: 1 / 1;
+        }
+
     }
 
     .gridline {
         border-top: 2px solid gray;
-        grid-column: 1 / 5;
+        grid-column-start: 1;
+        grid-column-end: 15;
     }
 </style>
 
@@ -48,13 +83,14 @@
             <option value="fox">Fox</option>
             <option value="falco">Falco</option>
         </select>
+        <button id="swap">Switch attacker and defender</button>
     </form>
     <label for="max-percent">Max %:</label>
     <input type="range" value="100" min="10" max="200" step="10" id="max-percent"
         oninput="maxPercentValue.innerText = this.value">
     <output id="maxPercentValue">100</output>
 
-    <details name="expand1">
+    <details name="expand1" open>
         <summary>Ground moves</summary>
         <form>
             <fieldset>
@@ -67,7 +103,7 @@
             </fieldset>
         </form>
     </details>
-    <details name="expand2">
+    <details name="expand2" open>
         <summary>Aerials</summary>
         <form>
             <fieldset>
@@ -80,7 +116,7 @@
             </fieldset>
         </form>
     </details>
-    <details name="expand3">
+    <details name="expand3" open>
         <summary>Specials</summary>
         <form>
             <fieldset>
@@ -94,7 +130,9 @@
     </details>
 </div>
 <!-- /sidebar -->
-
+<div class="contenthead">
+    <h1>Fox&RightArrow;Marth</h1>
+</div>
 <div class="content">
     <div class="gridline" style="grid-row: 1 / 11;">0%</div>
     <div class="gridline" style="grid-row: 11 / 21;">10%</div>
@@ -106,8 +144,38 @@
     <div class="gridline" style="grid-row: 71 / 81;">70%</div>
     <div class="gridline" style="grid-row: 81 / 91;">80%</div>
     <div class="gridline" style="grid-row: 91 / 101;">90%</div>
+    <div class="gridline" style="grid-row: 101 / 111;">100%</div>
+    <div class="gridline" style="grid-row: 111 / 121;">110%</div>
+    <div class="gridline" style="grid-row: 121 / 131;">120%</div>
+    <div class="gridline" style="grid-row: 131 / 141;">130%</div>
 
-    <div class="rangebox" style="grid-row: 40 / 55; grid-column: 2;">
-        40-55
+    <div class="rangebox" style="grid-row: 1 / 141;">
+        <div class="sidetext"><b>weak nair</b></div>
+        <div class="rangebox" style="grid-row: 1 / 28; background: var(--red);">
+            <p><b>0-27</b><br>breaks crouch<br>(sakurai)</p>
+        </div>
+        <div class="rangebox" style="grid-row: 28 / 115; background: var(--green);">
+            <p><b>28-114</b><br>crouchable</p>
+        </div>
+        <div class="rangebox" style="grid-row: 115 / 141; background: var(--red);">
+            <p><b>115+</b><br>breaks crouch</p>
+        </div>
     </div>
+
+    <div class="rangebox" style="grid-row: 1 / 141; grid-column: 6 / span 3">
+        <div class="sidetext"><b>strong nair</b></div>
+        <div class="rangebox" style="grid-row: 1 / 8; background: var(--red);">
+            <p><b>0-7</b>breaks crouch (sakurai)</p>
+        </div>
+        <div class="rangebox" style="grid-row: 8 / 38; background: var(--cyan);">
+            <p><b>7-37</b><br>unsafe (asdi down)<br></p>
+        </div>
+        <div class="rangebox" style="grid-row: 38 / 75; background: var(--green);">
+            <p><b>38-75</b><br>crouchable</p>
+        </div>
+        <div class="rangebox" style="grid-row: 75 / 141; background: var(--red);">
+            <p><b>76+</b><br>breaks crouch</p>
+        </div>
+    </div>
+
 </div>
