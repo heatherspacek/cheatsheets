@@ -3,6 +3,7 @@
         --blue: linear-gradient(rgb(169, 189, 233), rgb(137, 137, 225));
         --cyan: linear-gradient(rgb(169, 219, 233), rgb(137, 215, 225));
         --green: linear-gradient(rgb(172, 233, 169), rgb(163, 225, 137));
+        --red: linear-gradient(rgb(239, 119, 119), rgb(209, 178, 122));
     }
 
     .sidebar {
@@ -17,6 +18,18 @@
         .sidebar {
             visibility: hidden;
         }
+    }
+
+    .sidebar:not(:has(#strong-nair:checked)) {
+        ~ .content .rangebox {
+            opacity: 0.1;
+        }
+    }
+
+    .square {
+        width: 1rem;
+        height: 1rem;
+        border: 1px solid black;
     }
 
     .contenthead {
@@ -39,7 +52,7 @@
     }
 
     .rangebox {
-        background: linear-gradient(rgb(239, 119, 119), rgb(209, 178, 122));
+        background: var(--red);
         grid-column: 2 / span 3;
         border: 1px solid black;
         display: grid;
@@ -108,11 +121,10 @@
         <form>
             <fieldset>
                 <legend>top of the thingy</legend>
-                <input type="checkbox" id="ch2.1">
-                <label for="ch2.1">check1</label>
-                <input type="checkbox" id="ch2.2">
-                <label for="ch2.2">check2</label>
-
+                <input type="checkbox" id="strong-nair" checked>
+                <label for="strong-nair">Strong Nair</label>
+                <input type="checkbox" id="weak-nair" checked>
+                <label for="weak-nair">Weak Nair</label>
             </fieldset>
         </form>
     </details>
@@ -128,6 +140,16 @@
             </fieldset>
         </form>
     </details>
+
+<!--forgive abuse of fieldset. i just like the look. -->
+    <fieldset>
+    <legend><b><i>Legend</b></i></legend>
+    <div class="square" style="background: var(--red)"><div style="position:relative;left:120%;text-wrap:nowrap;">No counterplay</div></div>
+    <div class="square" style="background: var(--orange)"><div style="position:relative;left:120%;text-wrap:nowrap;">Always knocks down</div></div>
+    <div class="square" style="background: var(--green)"><div style="position:relative;left:120%;text-wrap:nowrap;">Crouchable</div></div>
+    <div class="square" style="background: var(--cyan)"><div style="position:relative;left:120%;text-wrap:nowrap;">ASDI Down-able</div></div>
+    </fieldset>
+
 </div>
 <!-- /sidebar -->
 <div class="contenthead">
