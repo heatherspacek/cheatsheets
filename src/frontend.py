@@ -14,10 +14,6 @@ from flask import (
     session,
 )
 
-from wtforms import MultipleFileField, SubmitField, StringField, SelectField
-from wtforms.validators import DataRequired
-
-
 app = Flask(__name__)
 app.secret_key = secrets.token_urlsafe(16)
 
@@ -43,57 +39,16 @@ app.secret_key = secrets.token_urlsafe(16)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    # form = FrontForm()
-    if "user_id" not in session:
-        # just got here, generate a UID.
-        session["user_id"] = str(uuid.uuid4())
-    message = ""
-    auth_status = (
-        f"Logged in as {session['credentials']['account']}"
-        if "credentials" in session
-        else "Not logged in. -->"
-    )
-
-    # if form.validate_on_submit():
-    #     if "credentials" not in session:
-    #         # TODO: this doesnt work. i think i have a poor understanding of how to
-    #         # do these types of messages.
-    #         message = "<b>Log in with your Google account to use the uploader.</b>"
-    #         return redirect(url_for("index"))
-
-    #     # --- Slippi parsing
-    #     files_received_list = request.files.to_dict(flat=False)["uploader"]
-    #     organized_replays_list = slippi.process_files(
-    #         files_received_list, form.tourney_slug_input.data
-    #     )
-    #     # ** NOTE ref: data schema for the replay entries here is:
-    #     # characters costumes tags stage timestamp duration winner filename
-    #     # --- Start.gg parsing
-    #     raw_response = startgg.send_request(form.tourney_slug_input.data)
-    #     (organized_sets_list, tournament_name) = startgg.organize_result(
-    #         raw_response.content
-    #     )
-
-    #     # If we got here, ready to go! ========================
-    #     session["tournament_slug"] = form.tourney_slug_input.data
-    #     session["tournament_name"] = tournament_name
-    #     user_id = session["user_id"]
-    #     # Fill up redis with user data.
-    #     for replay_info in organized_replays_list:
-    #         redis_client.lpush(f"user:{user_id}:replays", json.dumps(replay_info))
-    #     redis_client.expire(f"user:{user_id}:replays", 3600)
-    #     for set_info in organized_sets_list:
-    #         redis_client.lpush(f"user:{user_id}:sets", json.dumps(set_info))
-    #     redis_client.expire(f"user:{user_id}:sets", 3600)
-
-    #     return redirect(url_for("sorting"))
 
     return render_template(
         "index.html",
-        # form=form,
-        message=message,
-        auth_status=auth_status,
     )
+
+@app.route("/submit", methods=["POST"])
+def set_characters():
+    attacker = request.form.get('attacker')
+    defender = request.form.get('defender')
+    return redirect(url_for("index"))
 
 
 # @app.route("/sorting", methods=["POST", "GET"])
