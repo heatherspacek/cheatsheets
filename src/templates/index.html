@@ -60,9 +60,7 @@
         overflow: auto;
 
         grid-auto-flow: column;
-        /* make this minmax() later. */
         grid-auto-columns: minmax(1rem, 25%);
-        /* grid-auto-columns: auto; */
     }
 
     .rangebox {
@@ -77,11 +75,12 @@
         &>p {
             /* IMPORTANT to preserve ALL positioning! */
             position: absolute;
+            margin: 0.25rem;
         }
 
         &>.sidetext {
-
             position: absolute;
+            margin-top: 0.5rem;
             font-size: larger;
             font-style: italic;
             writing-mode: vertical-rl;
