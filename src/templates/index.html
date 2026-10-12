@@ -4,6 +4,7 @@
         --cyan: linear-gradient(rgb(169, 219, 233), rgb(137, 215, 225));
         --green: linear-gradient(rgb(172, 233, 169), rgb(163, 225, 137));
         --red: linear-gradient(rgb(239, 119, 119), rgb(209, 178, 122));
+        --grey: linear-gradient(rgb(182, 182, 182), rgb(221, 221, 221));
     }
 
     .sidebar {
@@ -20,9 +21,15 @@
         }
     }
 
-    .sidebar:not(:has(#strong-nair:checked)) {
-        ~ .content .rangebox {
-            opacity: 0.1;
+    .sidebar:not(:has(#strong-nair-check:checked)) {
+        ~.content #strong-nair {
+            display: none;
+        }
+    }
+
+    .sidebar:not(:has(#weak-nair-check:checked)) {
+        ~.content #weak-nair {
+            display: none;
         }
     }
 
@@ -39,6 +46,8 @@
     }
 
     .content {
+        background: linear-gradient(black 0%, transparent 2px) repeat-y;
+        background-size: 100% 6.96%;
         position: absolute;
         left: 18rem;
         top: 10%;
@@ -49,38 +58,48 @@
         border: 3px double gray;
         resize: both;
         overflow: auto;
+
+        grid-auto-flow: column;
+        /* make this minmax() later. */
+        grid-auto-columns: minmax(1rem, 25%);
+        /* grid-auto-columns: auto; */
     }
 
     .rangebox {
-        background: var(--red);
-        grid-column: 2 / span 3;
+        background: var(--grey);
         border: 1px solid black;
         display: grid;
         grid-template-rows: subgrid;
-        min-height: 0;
+        margin-left: 0.5rem;
+        grid-column: 2 / span 4;
+        opacity: 0.93;
 
         &>p {
+            /* IMPORTANT to preserve ALL positioning! */
             position: absolute;
-            /* writing-mode: vertical-rl;
-            text-orientation: sideways; */
-            text-wrap: 1;
         }
 
         &>.sidetext {
+
             position: absolute;
             font-size: larger;
             font-style: italic;
             writing-mode: vertical-rl;
             text-orientation: sideways;
-            grid-column: 1 / 1;
+
         }
+
+    }
+
+    .explanationbox {
+        position: absolute;
+        display: none;
 
     }
 
     .gridline {
         border-top: 2px solid gray;
-        grid-column-start: 1;
-        grid-column-end: 15;
+        width: fit-content;
     }
 </style>
 
@@ -120,11 +139,20 @@
         <summary>Aerials</summary>
         <form>
             <fieldset>
-                <legend>top of the thingy</legend>
-                <input type="checkbox" id="strong-nair" checked>
-                <label for="strong-nair">Strong Nair</label>
-                <input type="checkbox" id="weak-nair" checked>
-                <label for="weak-nair">Weak Nair</label>
+                <legend>Crouch-breakers</legend>
+                <input type="checkbox" id="strong-nair-check" checked>
+                <label for="strong-nair-check">Strong Nair</label>
+                <br>
+                <input type="checkbox" id="weak-nair-check" checked>
+                <label for="weak-nair-check">Weak Nair</label>
+            </fieldset>
+            <fieldset>
+                <legend>Normal moves</legend>
+                <input type="checkbox" id="strong-dash-check" checked>
+                <label for="strong-dash-check">Strong DashAttack</label>
+                <br>
+                <input type="checkbox" id="weak-dash-check" checked>
+                <label for="weak-dash-check">Late DashAttack</label>
             </fieldset>
         </form>
     </details>
@@ -141,13 +169,21 @@
         </form>
     </details>
 
-<!--forgive abuse of fieldset. i just like the look. -->
+    <!--forgive abuse of fieldset. i just like the look. -->
     <fieldset>
-    <legend><b><i>Legend</b></i></legend>
-    <div class="square" style="background: var(--red)"><div style="position:relative;left:120%;text-wrap:nowrap;">No counterplay</div></div>
-    <div class="square" style="background: var(--orange)"><div style="position:relative;left:120%;text-wrap:nowrap;">Always knocks down</div></div>
-    <div class="square" style="background: var(--green)"><div style="position:relative;left:120%;text-wrap:nowrap;">Crouchable</div></div>
-    <div class="square" style="background: var(--cyan)"><div style="position:relative;left:120%;text-wrap:nowrap;">ASDI Down-able</div></div>
+        <legend><b><i>Legend</b></i></legend>
+        <div class="square" style="background: var(--red)">
+            <div style="position:relative;left:120%;text-wrap:nowrap;">No counterplay</div>
+        </div>
+        <div class="square" style="background: var(--orange)">
+            <div style="position:relative;left:120%;text-wrap:nowrap;">Always knocks down</div>
+        </div>
+        <div class="square" style="background: var(--green)">
+            <div style="position:relative;left:120%;text-wrap:nowrap;">Crouchable</div>
+        </div>
+        <div class="square" style="background: var(--cyan)">
+            <div style="position:relative;left:120%;text-wrap:nowrap;">ASDI Down-able</div>
+        </div>
     </fieldset>
 
 </div>
@@ -171,7 +207,7 @@
     <div class="gridline" style="grid-row: 121 / 131;">120%</div>
     <div class="gridline" style="grid-row: 131 / 141;">130%</div>
 
-    <div class="rangebox" style="grid-row: 1 / 141;">
+    <div class="rangebox" id="weak-nair" style="grid-row: 1 / 141; grid-column: auto;">
         <div class="sidetext"><b>weak nair</b></div>
         <div class="rangebox" style="grid-row: 1 / 28; background: var(--red);">
             <p><b>0-27</b><br>breaks crouch<br>(sakurai)</p>
@@ -184,7 +220,7 @@
         </div>
     </div>
 
-    <div class="rangebox" style="grid-row: 1 / 141; grid-column: 6 / span 3">
+    <div class="rangebox" id="strong-nair" style="grid-row: 1 / 141; grid-column: auto;">
         <div class="sidetext"><b>strong nair</b></div>
         <div class="rangebox" style="grid-row: 1 / 8; background: var(--red);">
             <p><b>0-7</b>breaks crouch (sakurai)</p>
@@ -197,6 +233,19 @@
         </div>
         <div class="rangebox" style="grid-row: 75 / 141; background: var(--red);">
             <p><b>76+</b><br>breaks crouch</p>
+        </div>
+    </div>
+
+    <div class="rangebox" style="grid-row: 1 / 141; ; grid-column: auto;">
+        <div class="sidetext"><b>dash attack (early)</b></div>
+        <div class="rangebox" style="grid-row: 1 / 40; background: var(--cyan);">
+            <p><b>0-40</b><br>unsafe<br></p>
+        </div>
+        <div class="rangebox" style="grid-row: 41 / 106; background: var(--green);">
+            <p><b>41-106</b><br>crouchable</p>
+        </div>
+        <div class="rangebox" style="grid-row: 107 / 141; background: var(--red);">
+            <p><b>107+</b><br>breaks crouch</p>
         </div>
     </div>
 
